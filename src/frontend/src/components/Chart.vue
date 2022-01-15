@@ -1,5 +1,5 @@
 <template>
-    <canvas id="chart"></canvas>
+    <canvas></canvas>
 </template>
 
 <script>
@@ -10,7 +10,8 @@ import Chart from 'chart.js/auto'
 export default {
   methods: {
     renderChart () {
-      const ctx = document.getElementById('chart')
+      // const ctx = document.getElementById('canvas')
+      const ctx = this.$el
       new Chart(ctx, {
         type: 'line',
         data: {
