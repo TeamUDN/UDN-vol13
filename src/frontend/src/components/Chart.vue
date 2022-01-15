@@ -9,20 +9,51 @@ import Chart from 'chart.js/auto'
 
 export default {
   props: [
-    'canvasLabel'
+    'canvasLabelType',
+    'labelEndNum'
   ],
+  data () {
+    return {
+      canvasLabel: '',
+      labelArr: []
+    }
+  },
   methods: {
+    labelCheck () {
+      switch (this.canvasLabelType) {
+        case 'date':
+          this.canvasLabel = '日'
+          var endNumDate = parseInt(this.labelEndNum, 10)
+          for (let i = 0; i < 7; i++) {
+            this.labelArr.push(endNumDate)
+            endNumDate -= 1
+          }
+          this.labelArr = this.labelArr.reverse()
+          break
+        case 'time':
+          this.canvasLabel = '時'
+          var endNumTime = parseInt(this.labelEndNum, 10)
+          for (let i = 0; i < 7; i++) {
+            this.labelArr.push(endNumTime)
+            endNumTime -= 1
+          }
+          this.labelArr = this.labelArr.reverse()
+          break
+      }
+    },
     renderChart () {
+      this.labelCheck()
       // const ctx = document.getElementById('canvas')
       const ctx = this.$el
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['赤', '青', '黄色', '緑', '紫', '橙'],
+          // labels: ['赤', '青', '黄色', '緑', '紫', '橙'],
+          labels: this.labelArr,
           datasets: [{
             // label: '得票数',
             label: this.canvasLabel,
-            data: [12, 19, 3, 5, 2, 3],
+            data: [12, 19, 3, 5, 2, 3, 7],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
