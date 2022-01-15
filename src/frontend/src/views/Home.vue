@@ -2,8 +2,10 @@
   <div class="home">
     <h1>This is a home page</h1>
     <h2>chart sample</h2>
-    <Chart></Chart>
-    <Chart></Chart>
+    <div class="canvasArea">
+      <Chart></Chart>
+      <Chart></Chart>
+    </div>
   </div>
 </template>
 
@@ -16,3 +18,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.canvasArea {
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+</style>
