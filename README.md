@@ -2,7 +2,12 @@
 
 Vue CLI + Flask の練習
 
-## フロントエンド単体での開発用サーバ
+## Vue CLI の build
+```
+$ npm run build
+```
+
+## フロントエンド単体での開発用サーバ起動
 ```
 $ cd frontend
 $ npm run serve
@@ -10,11 +15,11 @@ $ npm run serve
 
 ## FlaskのWebサーバ起動
 ```
-$ cd backend
+$ cd src
 $ pipenv run start
 ```
 
-## Docker
+## Docker起動
 ```
 $ docker compose up
 ```
