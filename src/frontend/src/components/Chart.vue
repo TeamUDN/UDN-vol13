@@ -8,6 +8,9 @@
 import Chart from 'chart.js/auto'
 
 export default {
+  props: [
+    'canvasLabel'
+  ],
   methods: {
     renderChart () {
       // const ctx = document.getElementById('canvas')
@@ -17,7 +20,8 @@ export default {
         data: {
           labels: ['赤', '青', '黄色', '緑', '紫', '橙'],
           datasets: [{
-            label: '得票数',
+            // label: '得票数',
+            label: this.canvasLabel,
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',

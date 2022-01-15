@@ -3,8 +3,8 @@
     <h1>This is a home page</h1>
     <h2>chart sample</h2>
     <div class="canvasArea">
-      <Chart></Chart>
-      <Chart></Chart>
+      <Chart canvas-label="日"></Chart>
+      <Chart canvas-label="時"></Chart>
     </div>
   </div>
 </template>
