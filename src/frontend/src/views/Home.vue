@@ -34,6 +34,7 @@
       <div class="contents">
         <div v-if="isActive === '1'">
           タイムライン
+          <button @click="test">postのテスト</button>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Chart from '../components/Chart'
 import Btn from '../components/btn_design.vue'
 
@@ -60,6 +62,18 @@ export default {
   data () {
     return {
       isActive: '1'
+    }
+  },
+  methods: {
+    test: function () {
+      axios.post('/test', {
+        param: 'vue-post!!'
+      }).then(res => {
+        console.log(res)
+        // this.posts = res.data.posts
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
