@@ -21,16 +21,24 @@
       </div>
     </div>
     <div class="tabArea">
+      <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
+      <Btn btn-text="なにもわからん" btn-color="purple" icon="&#x1f607;" ></Btn>
+      <Btn btn-text="できた！！" btn-color="yellow" icon="&#x1f44d;" ></Btn>
+      <Btn btn-text="ぴえん" btn-color="blue" icon="&#x1f97a;" ></Btn>
+      <Btn btn-text="天才かも…！？" btn-color="green" icon="&#x1f393;" ></Btn>
     </div>
   </div>
 </template>
 
 <script>
 import Chart from '../components/Chart'
+import Btn from '../components/btn_design.vue'
+
 export default {
   name: 'home',
   components: {
-    Chart
+    Chart,
+    Btn
   }
 }
 </script>
