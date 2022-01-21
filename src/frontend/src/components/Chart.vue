@@ -90,3 +90,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+canvas {
+  background-color: #ffffff;
+}
+</style>
