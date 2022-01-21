@@ -16,4 +16,5 @@ const vueEnv = {
   VUE_APP_API_TEST: JSON.stringify(process.env.VUE_APP_API_TEST)
 }
 
+console.log(process.env.VUE_APP_API_TEST)
 export default vueEnv
