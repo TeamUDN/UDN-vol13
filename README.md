@@ -4,12 +4,13 @@ Vue CLI + Flask の練習
 
 ## Vue CLI の build
 ```
+$ cd src/frontend
 $ npm run build
 ```
 
 ## フロントエンド単体での開発用サーバ起動
 ```
-$ cd frontend
+$ cd src/frontend
 $ npm run serve
 ```
 
