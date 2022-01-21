@@ -39,11 +39,21 @@
           <button @click="whereTest">whereTest</button>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
-          <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
-          <Btn btn-text="なにもわからん" btn-color="purple" icon="&#x1f607;" ></Btn>
-          <Btn btn-text="できた！！" btn-color="yellow" icon="&#x1f44d;" ></Btn>
-          <Btn btn-text="ぴえん" btn-color="blue" icon="&#x1f97a;" ></Btn>
-          <Btn btn-text="天才かも…！？" btn-color="green" icon="&#x1f393;" ></Btn>
+          <button @click="postProgress(1)">
+            <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
+          </button>
+          <button @click="postProgress(2)">
+            <Btn btn-text="なにもわからん" btn-color="purple" icon="&#x1f607;" ></Btn>
+          </button>
+          <button @click="postProgress(3)">
+            <Btn btn-text="できた！！" btn-color="yellow" icon="&#x1f44d;" ></Btn>
+          </button>
+          <button @click="postProgress(4)">
+            <Btn btn-text="ぴえん" btn-color="blue" icon="&#x1f97a;" ></Btn>
+          </button>
+          <button @click="postProgress(5)">
+            <Btn btn-text="天才かも…！？" btn-color="green" icon="&#x1f393;" ></Btn>
+          </button>
         </div>
       </div>
     </div>
@@ -94,12 +104,25 @@ export default {
           console.log(`${doc.id}: ${doc.data().name}`)
         })
       })
+    },
+    postProgress (type) {
+      console.log('btn' + type)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* reset css */
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
 .home {
   display: flex;
 }
