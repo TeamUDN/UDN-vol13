@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!--<h1>This is a home page</h1>
+    <h2>chart sample</h2>-->
+    <div class="canvasArea">
+      <Chart canvas-label-type="date" label-end-num="9"></Chart>
+      <Chart canvas-label-type="time" label-end-num="15"></Chart>
+      <Chart canvas-label-type="time" label-end-num="30"></Chart>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Chart from '../components/Chart'
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
-    HelloWorld
+    Chart
   }
 }
 </script>
+
+<style scoped>
+.canvasArea {
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+</style>
