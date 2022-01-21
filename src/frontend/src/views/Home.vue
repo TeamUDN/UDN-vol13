@@ -7,6 +7,9 @@
       <Chart canvas-label-type="time" label-end-num="15"></Chart>
       <Chart canvas-label-type="time" label-end-num="30"></Chart>
     </div>
+  <div>
+    <test2></test2>
+  </div>
   </div>
 </template>
 
@@ -17,6 +20,13 @@ export default {
   components: {
     Chart
   }
+}
+import test2 from '../components/test'
+export default{
+   name: 'home',
+   components: {
+      test2
+   }
 }
 </script>
 
