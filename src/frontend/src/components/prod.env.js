@@ -2,7 +2,7 @@ import 'firebase/compat/firestore'
 import 'firebase/compat/auth'
 import 'firebase/compat/storage'
 
-module.exports = {
+const vueEnv = {
   NODE_ENV: '"production"',
   REST_API_URL: JSON.stringify(process.env.REST_API_URL),
   VUE_APP_API_KEY: JSON.stringify(process.env.VUE_APP_API_KEY),
@@ -14,3 +14,5 @@ module.exports = {
   VUE_APP_PROJECT_ID: JSON.stringify(process.env.VUE_APP_PROJECT_ID),
   VUE_APP_STORAGE_BUCKET: JSON.stringify(process.env.VUE_APP_STORAGE_BUCKET)
 }
+
+export default vueEnv
