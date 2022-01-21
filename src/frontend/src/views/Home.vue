@@ -49,8 +49,16 @@ export default {
 }
 .allChartArea {
   width: 75%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   display: flex;
   flex-direction: column;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 .chartArea{
   &:nth-child(even){
@@ -70,6 +78,8 @@ export default {
 }
 .tabArea {
   width: 25%;
+  height: 100vh;
+  overflow: hidden;
   background-color: gray;
 }
 </style>
