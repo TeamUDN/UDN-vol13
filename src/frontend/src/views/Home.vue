@@ -36,6 +36,7 @@
           タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
+          <button @click="whereTest">whereTest</button>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
@@ -86,6 +87,13 @@ export default {
         .catch(function (error) {
           console.error('Error writing document: ', error)
         })
+    },
+    whereTest () {
+      db.collection('test').where('name', '==', 'udn').get().then(snapShot => {
+        snapShot.forEach(doc => {
+          console.log(`${doc.id}: ${doc.data().name}`)
+        })
+      })
     }
   }
 }
