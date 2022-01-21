@@ -1,10 +1,11 @@
 <template>
   <div class="home">
-    <h1>This is a home page</h1>
-    <h2>chart sample</h2>
+    <!--<h1>This is a home page</h1>
+    <h2>chart sample</h2>-->
     <div class="canvasArea">
-      <Chart canvas-label-type="date" label-end-num="10"></Chart>
+      <Chart canvas-label-type="date" label-end-num="9"></Chart>
       <Chart canvas-label-type="time" label-end-num="15"></Chart>
+      <Chart canvas-label-type="time" label-end-num="30"></Chart>
     </div>
   </div>
 </template>
