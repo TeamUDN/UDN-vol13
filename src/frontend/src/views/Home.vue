@@ -34,6 +34,8 @@
       <div class="contents">
         <div v-if="isActive === '1'">
           タイムライン
+          <button @click="getTest">getTest</button>
+          <button @click="pushTest">pushTest</button>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
@@ -48,6 +50,7 @@
 </template>
 
 <script>
+import db from '../components/firebase.js'
 import Chart from '../components/Chart'
 import Btn from '../components/btn_design.vue'
 
@@ -60,6 +63,29 @@ export default {
   data () {
     return {
       isActive: '1'
+    }
+  },
+  methods: {
+    getTest () {
+      db.collection('test')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data().name}`)
+            // this.data.push(doc.data().name)
+          })
+        })
+    },
+    pushTest () {
+      db.collection('test').add({
+        name: 'mikan'
+      })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     }
   }
 }
