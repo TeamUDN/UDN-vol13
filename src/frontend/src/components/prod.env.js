@@ -13,7 +13,7 @@ const vueEnv = {
   VUE_APP_MESSAGING_SENSOR_ID: JSON.stringify(process.env.VUE_APP_MESSAGING_SENSOR_ID),
   VUE_APP_PROJECT_ID: JSON.stringify(process.env.VUE_APP_PROJECT_ID),
   VUE_APP_STORAGE_BUCKET: JSON.stringify(process.env.VUE_APP_STORAGE_BUCKET),
-  VUE_APP_API_TEST: JSON.stringify(process.env.VUE_APP_APT_TEST)
+  VUE_APP_API_TEST: JSON.stringify(process.env.VUE_APP_API_TEST)
 }
 
 export default vueEnv
