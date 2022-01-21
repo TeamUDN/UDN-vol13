@@ -73,7 +73,8 @@ export default {
   },
   data () {
     return {
-      isActive: '1'
+      isActive: '1',
+      userID: '0000'
     }
   },
   methods: {
@@ -105,7 +106,19 @@ export default {
         })
       })
     },
+    getNowDate () {
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var day = date.getDate()
+      var hour = date.getHours()
+      var minute = date.getMinutes()
+      var dateArr = [year, month, day, hour, minute]
+      return dateArr
+    },
     postProgress (type) {
+      var getNowDate = this.getNowDate()
+      console.log(getNowDate)
       console.log('btn' + type)
     }
   }
