@@ -53,6 +53,7 @@
 import db from '../components/firebase-env.js'
 import Chart from '../components/Chart'
 import Btn from '../components/btn_design.vue'
+console.log(db.apiTest)
 
 export default {
   name: 'home',
