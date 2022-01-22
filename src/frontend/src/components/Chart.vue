@@ -17,13 +17,6 @@ export default {
     return {
       labelArr: [],
       dataArr: [],
-      data0: 0,
-      data1: 0,
-      data2: 0,
-      data3: 0,
-      data4: 0,
-      data5: 0,
-      data6: 0,
       startNum: 0
     }
   },
@@ -54,6 +47,48 @@ export default {
     },
     async dataCount () {
       console.log(this.startNum + '〜' + this.searchDateArr[3])
+      var dataArr0 = []
+      var dataArr1 = []
+      var dataArr2 = []
+      var dataArr3 = []
+      var dataArr4 = []
+      var dataArr5 = []
+      var dataArr6 = []
+      var pink0 = 0
+      var pink1 = 0
+      var pink2 = 0
+      var pink3 = 0
+      var pink4 = 0
+      var pink5 = 0
+      var pink6 = 0
+      var purple0 = 0
+      var purple1 = 0
+      var purple2 = 0
+      var purple3 = 0
+      var purple4 = 0
+      var purple5 = 0
+      var purple6 = 0
+      var yellow0 = 0
+      var yellow1 = 0
+      var yellow2 = 0
+      var yellow3 = 0
+      var yellow4 = 0
+      var yellow5 = 0
+      var yellow6 = 0
+      var blue0 = 0
+      var blue1 = 0
+      var blue2 = 0
+      var blue3 = 0
+      var blue4 = 0
+      var blue5 = 0
+      var blue6 = 0
+      var green0 = 0
+      var green1 = 0
+      var green2 = 0
+      var green3 = 0
+      var green4 = 0
+      var green5 = 0
+      var green6 = 0
       switch (this.canvasLabelType) {
         case 'date':
           break
@@ -63,41 +98,166 @@ export default {
             .then((querySnapshot) => {
               querySnapshot.forEach((doc) => {
                 if ((this.startNum <= doc.data().date.hour) && (doc.data().date.hour <= this.searchDateArr[3])) {
-                  console.log(doc.data().date.minute)
                   switch (doc.data().date.hour) {
                     case this.labelArr[0]:
-                      console.log(this.labelArr[0])
-                      this.data0++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink0++
+                          break
+                        case 2:
+                          purple0++
+                          break
+                        case 3:
+                          yellow0++
+                          break
+                        case 4:
+                          blue0++
+                          break
+                        case 5:
+                          green0++
+                          break
+                      }
                       break
                     case this.labelArr[1]:
                       console.log(this.labelArr[1])
-                      this.data1++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink1++
+                          break
+                        case 2:
+                          purple1++
+                          break
+                        case 3:
+                          yellow1++
+                          break
+                        case 4:
+                          blue1++
+                          break
+                        case 5:
+                          green1++
+                          break
+                      }
                       break
                     case this.labelArr[2]:
-                      console.log(this.labelArr[2])
-                      this.data2++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink2++
+                          break
+                        case 2:
+                          purple2++
+                          break
+                        case 3:
+                          yellow2++
+                          break
+                        case 4:
+                          blue2++
+                          break
+                        case 5:
+                          green2++
+                          break
+                      }
                       break
                     case this.labelArr[3]:
-                      console.log(this.labelArr[3])
-                      this.data3++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink3++
+                          break
+                        case 2:
+                          purple3++
+                          break
+                        case 3:
+                          yellow3++
+                          break
+                        case 4:
+                          blue3++
+                          break
+                        case 5:
+                          green3++
+                          break
+                      }
                       break
                     case this.labelArr[4]:
-                      console.log(this.labelArr[4])
-                      this.data4++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink4++
+                          break
+                        case 2:
+                          purple4++
+                          break
+                        case 3:
+                          yellow4++
+                          break
+                        case 4:
+                          blue4++
+                          break
+                        case 5:
+                          green4++
+                          break
+                      }
                       break
                     case this.labelArr[5]:
-                      console.log(this.labelArr[5])
-                      this.data5++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink5++
+                          break
+                        case 2:
+                          purple5++
+                          break
+                        case 3:
+                          yellow5++
+                          break
+                        case 4:
+                          blue5++
+                          break
+                        case 5:
+                          green5++
+                          break
+                      }
                       break
                     case this.labelArr[6]:
-                      console.log(this.labelArr[6])
-                      this.data6++
+                      switch (doc.data().btnType) {
+                        case 1:
+                          pink6++
+                          break
+                        case 2:
+                          purple6++
+                          break
+                        case 3:
+                          yellow6++
+                          break
+                        case 4:
+                          blue6++
+                          break
+                        case 5:
+                          green6++
+                          break
+                      }
                       break
                   }
                 }
+                dataArr0 = []
+                dataArr0.push(pink0, purple0, yellow0, blue0, green0)
+
+                dataArr1 = []
+                dataArr1.push(pink1, purple1, yellow1, blue1, green1)
+
+                dataArr2 = []
+                dataArr2.push(pink2, purple2, yellow2, blue2, green2)
+
+                dataArr3 = []
+                dataArr3.push(pink3, purple3, yellow3, blue3, green3)
+
+                dataArr4 = []
+                dataArr4.push(pink4, purple4, yellow4, blue4, green4)
+
+                dataArr5 = []
+                dataArr5.push(pink5, purple5, yellow5, blue5, green5)
+
+                dataArr6 = []
+                dataArr6.push(pink6, purple6, yellow6, blue6, green6)
+
                 this.dataArr = []
-                this.dataArr.push(this.data0, this.data1, this.data2, this.data3, this.data4, this.data5, this.data6)
-                console.log(this.dataArr)
+                this.dataArr.push(dataArr0, dataArr1, dataArr2, dataArr3, dataArr4, dataArr5, dataArr6)
               })
             })
           break
@@ -117,7 +277,7 @@ export default {
           datasets: [{
             label: '😎 いい感じ  ',
             // data: [12, 19, 3, 5, 2, 3, 7],
-            data: this.dataArr,
+            data: [this.dataArr[0][0], this.dataArr[1][0], this.dataArr[2][0], this.dataArr[3][0], this.dataArr[4][0], this.dataArr[5][0], this.dataArr[6][0]],
             backgroundColor: [
               // pink
               'rgba(255, 99, 132, 0.2)'
@@ -130,7 +290,8 @@ export default {
           },
           {
             label: '😇 なにもわからん  ',
-            data: [8, 10, 2, 4, 1, 6, 10],
+            // data: [8, 10, 2, 4, 1, 6, 10],
+            data: [this.dataArr[0][1], this.dataArr[1][1], this.dataArr[2][1], this.dataArr[3][1], this.dataArr[4][1], this.dataArr[5][1], this.dataArr[6][1]],
             backgroundColor: [
               // purple
               'rgba(153, 102, 255, 0.2)'
@@ -143,7 +304,8 @@ export default {
           },
           {
             label: '👍 できた！！  ',
-            data: [2, 5, 6, 2, 8, 3, 1],
+            // data: [2, 5, 6, 2, 8, 3, 1],
+            data: [this.dataArr[0][2], this.dataArr[1][2], this.dataArr[2][2], this.dataArr[3][2], this.dataArr[4][2], this.dataArr[5][2], this.dataArr[6][2]],
             backgroundColor: [
               // yellow
               'rgba(255, 206, 86, 0.2)'
@@ -156,7 +318,8 @@ export default {
           },
           {
             label: '🥺 ぴえん  ',
-            data: [5, 1, 2, 9, 3, 6, 13],
+            // data: [5, 1, 2, 9, 3, 6, 13],
+            data: [this.dataArr[0][3], this.dataArr[1][3], this.dataArr[2][3], this.dataArr[3][3], this.dataArr[4][3], this.dataArr[5][3], this.dataArr[6][3]],
             backgroundColor: [
               // blue
               'rgba(54, 162, 235, 0.2)'
@@ -169,7 +332,8 @@ export default {
           },
           {
             label: '🎓 天才かも…！？',
-            data: [1, 10, 3, 5, 2, 9, 14],
+            // data: [1, 10, 3, 5, 2, 9, 14],
+            data: [this.dataArr[0][4], this.dataArr[1][4], this.dataArr[2][4], this.dataArr[3][4], this.dataArr[4][4], this.dataArr[5][4], this.dataArr[6][4]],
             backgroundColor: [
               // green
               'rgba(75, 192, 192, 0.2)'
