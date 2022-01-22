@@ -4,19 +4,19 @@
       <div class="chartArea">
         <p>全体</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart ref="chart1" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>チーム</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart ref="chart2" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>個人</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart ref="chart3" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
     </div>
@@ -88,14 +88,13 @@ export default {
       userID: '0000',
       userName: 'うどん',
       getProgressDataArr: [],
-      endNum: 0,
-      chartShow: false
+      chartShow: false,
+      searchDateArr: []
     }
   },
   mounted: function () {
-    var date = new Date()
-    var hour = date.getHours()
-    this.endNum = hour
+    this.searchDateArr = this.getNowDate()
+    this.endNum = this.searchDateArr[3]
     this.chartShow = true
     this.getProgress()
   },
@@ -157,6 +156,9 @@ export default {
           console.log('Document successfully written!')
           self.getProgress()
           self.isActive = '1'
+          self.$refs.chart1.renderChart()
+          self.$refs.chart2.renderChart()
+          self.$refs.chart3.renderChart()
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
