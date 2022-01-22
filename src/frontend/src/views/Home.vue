@@ -171,6 +171,7 @@ export default {
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.getProgressDataArr.push(doc.data())
+            this.getProgressDataArr.sort((a, b) => b.date.year - a.date.year || b.date.month - a.date.month || b.date.day - a.date.day || b.date.hour - a.date.hour || b.date.minute - a.date.minute)
           })
         })
     }
