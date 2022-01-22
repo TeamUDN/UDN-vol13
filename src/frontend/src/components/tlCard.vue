@@ -9,7 +9,7 @@
     </div>
   <div class="dateArea">
     <p class="date">{{ year }}/{{ month }}/{{ day }}</p>
-    <p class="time">{{ hour }} : {{ strMinute }}</p>
+    <p class="time">{{ hour }}:{{ strMinute }}</p>
   </div>
   </div>
 </template>
