@@ -38,7 +38,7 @@
           <button @click="pushTest">pushTest</button>
           <button @click="whereTest">whereTest</button>-->
           <div v-for="data in getProgressDataArr" :key="data.minute">
-            <Card :user-id="data.userID" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
+            <Card :user-name="data.userName" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
           </div>
           <!--<div v-for="data in getProgressDataArr" :key="data.minute">
             <p>userID: {{ data.userID }}</p>
@@ -86,6 +86,7 @@ export default {
     return {
       isActive: '1',
       userID: '0000',
+      userName: 'うどん',
       getProgressDataArr: [],
       endNum: 0,
       chartShow: false
@@ -142,6 +143,7 @@ export default {
       var getNowDate = self.getNowDate()
       db.collection('logs').add({
         userID: self.userID,
+        userName: self.userName,
         btnType: type,
         date: {
           year: getNowDate[0],

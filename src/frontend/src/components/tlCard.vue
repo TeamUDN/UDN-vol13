@@ -3,7 +3,7 @@
     <div class="circleAndText">
       <div class="circle"></div>
       <div class="mainText">
-        <p class="userName">{{ userId }}</p>
+        <p class="userName">{{ userName }}</p>
         <p class="message" v-html="message"></p>
       </div>
     </div>
@@ -17,7 +17,7 @@
 <script>
 export default {
   props: {
-    userId: {
+    userName: {
       type: String,
       required: true
     },
