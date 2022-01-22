@@ -34,6 +34,7 @@
       <div class="contents">
         <div v-if="isActive === '1'">
           <button @click="localStorageTest">localStorageTest</button>
+          <button @click="localStorageRemove">localStorageRemove</button>
           <!--タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
@@ -101,14 +102,19 @@ export default {
   },
   methods: {
     localStorageTest () {
-      console.log('localStorageTest')
       if (localStorage.getItem('userID')) {
         console.log('2回目以降のアクセスです')
+        var userID = localStorage.getItem('userID')
+        console.log(userID)
       } else {
         console.log('初回アクセスです')
         var createUserID = this.createID(15)
         console.log(createUserID)
+        localStorage.setItem('userID', createUserID)
       }
+    },
+    localStorageRemove () {
+      localStorage.clear()
     },
     createID (n) {
       var CODE_TABLE = '0123456789' +
