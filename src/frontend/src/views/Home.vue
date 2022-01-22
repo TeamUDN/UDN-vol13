@@ -33,10 +33,10 @@
       </div>
       <div class="contents">
         <div v-if="isActive === '1'">
-          タイムライン
+          <!--タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
-          <button @click="whereTest">whereTest</button>
+          <button @click="whereTest">whereTest</button>-->
           <div v-for="data in getProgressDataArr" :key="data.minute">
             <Card :user-id="data.userID" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
           </div>
