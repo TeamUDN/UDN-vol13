@@ -33,6 +33,7 @@
       </div>
       <div class="contents">
         <div v-if="isActive === '1'">
+          <button @click="localStorageTest">localStorageTest</button>
           <!--タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
@@ -99,6 +100,26 @@ export default {
     this.getProgress()
   },
   methods: {
+    localStorageTest () {
+      console.log('localStorageTest')
+      if (localStorage.getItem('userID')) {
+        console.log('2回目以降のアクセスです')
+      } else {
+        console.log('初回アクセスです')
+        var createUserID = this.createID(15)
+        console.log(createUserID)
+      }
+    },
+    createID (n) {
+      var CODE_TABLE = '0123456789' +
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+        'abcdefghijklmnopqrstuvwxyz'
+      var r = ''
+      for (var i = 0, k = CODE_TABLE.length; i < n; i++) {
+        r += CODE_TABLE.charAt(Math.floor(k * Math.random()))
+      }
+      return r
+    },
     getTest () {
       db.collection('test')
         .get()
