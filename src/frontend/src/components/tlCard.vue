@@ -9,7 +9,7 @@
     </div>
   <div class="dateArea">
     <p class="date">{{ year }}/{{ month }}/{{ day }}</p>
-    <p class="time">{{ hour }} : {{ minute }}</p>
+    <p class="time">{{ hour }} : {{ strMinute }}</p>
   </div>
   </div>
 </template>
@@ -48,11 +48,13 @@ export default {
   },
   data () {
     return {
-      message: ''
+      message: '',
+      strMinute: ''
     }
   },
   mounted: function () {
     this.btnTypeCheck(this.btnType)
+    this.minuteCheck(this.minute)
   },
   methods: {
     btnTypeCheck (num) {
@@ -72,6 +74,14 @@ export default {
         case 5:
           this.message = '&#x1f393; 天才かも…！？'
           break
+      }
+    },
+    minuteCheck (minute) {
+      var strMin = String(minute)
+      if (strMin.length === 1) {
+        this.strMinute = '0' + strMin
+      } else {
+        this.strMinute = strMin
       }
     }
   }
