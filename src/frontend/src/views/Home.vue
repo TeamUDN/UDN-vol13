@@ -118,8 +118,23 @@ export default {
     },
     postProgress (type) {
       var getNowDate = this.getNowDate()
-      console.log(getNowDate)
-      console.log('btn' + type)
+      db.collection('logs').add({
+        userID: this.userID,
+        btnType: type,
+        date: {
+          year: getNowDate[0],
+          month: getNowDate[1],
+          day: getNowDate[2],
+          hour: getNowDate[3],
+          minute: getNowDate[4]
+        }
+      })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
     }
   }
 }
