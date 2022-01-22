@@ -156,6 +156,7 @@ export default {
         .then(function () {
           console.log('Document successfully written!')
           self.getProgress()
+          self.isActive = '1'
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
