@@ -154,6 +154,7 @@ export default {
         })
     },
     getProgress () {
+      this.getProgressDataArr = []
       db.collection('logs')
         .get()
         .then((querySnapshot) => {
