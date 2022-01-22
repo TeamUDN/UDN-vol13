@@ -4,19 +4,19 @@
       <div class="chartArea">
         <p>全体</p>
         <div>
-          <Chart canvas-label-type="date" label-end-num="9"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>チーム</p>
         <div>
-          <Chart canvas-label-type="time" label-end-num="15"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>個人</p>
         <div>
-          <Chart canvas-label-type="time" label-end-num="30"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
     </div>
@@ -33,16 +33,19 @@
       </div>
       <div class="contents">
         <div v-if="isActive === '1'">
-          タイムライン
+          <!--タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
-          <button @click="whereTest">whereTest</button>
+          <button @click="whereTest">whereTest</button>-->
           <div v-for="data in getProgressDataArr" :key="data.minute">
+            <Card :user-name="data.userName" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
+          </div>
+          <!--<div v-for="data in getProgressDataArr" :key="data.minute">
             <p>userID: {{ data.userID }}</p>
             <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
             <p>btnType: {{ data.btnType }}</p>
             <hr>
-          </div>
+          </div>-->
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <button @click="postProgress(1)">
@@ -70,21 +73,30 @@
 import db from '../components/firebase.js'
 import Chart from '../components/Chart'
 import Btn from '../components/btn_design.vue'
+import Card from '../components/tlCard.vue'
 
 export default {
   name: 'home',
   components: {
     Chart,
-    Btn
+    Btn,
+    Card
   },
   data () {
     return {
       isActive: '1',
       userID: '0000',
-      getProgressDataArr: []
+      userName: 'うどん',
+      getProgressDataArr: [],
+      endNum: 0,
+      chartShow: false
     }
   },
   mounted: function () {
+    var date = new Date()
+    var hour = date.getHours()
+    this.endNum = hour
+    this.chartShow = true
     this.getProgress()
   },
   methods: {
@@ -131,6 +143,7 @@ export default {
       var getNowDate = self.getNowDate()
       db.collection('logs').add({
         userID: self.userID,
+        userName: self.userName,
         btnType: type,
         date: {
           year: getNowDate[0],
@@ -143,12 +156,14 @@ export default {
         .then(function () {
           console.log('Document successfully written!')
           self.getProgress()
+          self.isActive = '1'
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
         })
     },
     getProgress () {
+      this.getProgressDataArr = []
       db.collection('logs')
         .get()
         .then((querySnapshot) => {
