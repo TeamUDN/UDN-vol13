@@ -37,13 +37,29 @@
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
           <button @click="whereTest">whereTest</button>
+          <div v-for="data in getProgressDataArr" :key="data.minute">
+            <p>userID: {{ data.userID }}</p>
+            <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
+            <p>btnType: {{ data.btnType }}</p>
+            <hr>
+          </div>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
-          <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
-          <Btn btn-text="なにもわからん" btn-color="purple" icon="&#x1f607;" ></Btn>
-          <Btn btn-text="できた！！" btn-color="yellow" icon="&#x1f44d;" ></Btn>
-          <Btn btn-text="ぴえん" btn-color="blue" icon="&#x1f97a;" ></Btn>
-          <Btn btn-text="天才かも…！？" btn-color="green" icon="&#x1f393;" ></Btn>
+          <button @click="postProgress(1)">
+            <Btn btn-text="いい感じ" btn-color="pink" icon="&#x1f60e;" ></Btn>
+          </button>
+          <button @click="postProgress(2)">
+            <Btn btn-text="なにもわからん" btn-color="purple" icon="&#x1f607;" ></Btn>
+          </button>
+          <button @click="postProgress(3)">
+            <Btn btn-text="できた！！" btn-color="yellow" icon="&#x1f44d;" ></Btn>
+          </button>
+          <button @click="postProgress(4)">
+            <Btn btn-text="ぴえん" btn-color="blue" icon="&#x1f97a;" ></Btn>
+          </button>
+          <button @click="postProgress(5)">
+            <Btn btn-text="天才かも…！？" btn-color="green" icon="&#x1f393;" ></Btn>
+          </button>
         </div>
       </div>
     </div>
@@ -63,8 +79,13 @@ export default {
   },
   data () {
     return {
-      isActive: '1'
+      isActive: '1',
+      userID: '0000',
+      getProgressDataArr: []
     }
+  },
+  mounted: function () {
+    this.getProgress()
   },
   methods: {
     getTest () {
@@ -94,12 +115,63 @@ export default {
           console.log(`${doc.id}: ${doc.data().name}`)
         })
       })
+    },
+    getNowDate () {
+      var date = new Date()
+      var year = date.getFullYear()
+      var month = date.getMonth() + 1
+      var day = date.getDate()
+      var hour = date.getHours()
+      var minute = date.getMinutes()
+      var dateArr = [year, month, day, hour, minute]
+      return dateArr
+    },
+    postProgress (type) {
+      var self = this
+      var getNowDate = self.getNowDate()
+      db.collection('logs').add({
+        userID: self.userID,
+        btnType: type,
+        date: {
+          year: getNowDate[0],
+          month: getNowDate[1],
+          day: getNowDate[2],
+          hour: getNowDate[3],
+          minute: getNowDate[4]
+        }
+      })
+        .then(function () {
+          console.log('Document successfully written!')
+          self.getProgress()
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+    },
+    getProgress () {
+      db.collection('logs')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.getProgressDataArr.push(doc.data())
+          })
+        })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* reset css */
+button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
 .home {
   display: flex;
 }
@@ -158,6 +230,13 @@ export default {
 .contents {
   width: 100%;
   height: 92%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 input[type=radio] {
   display: none;
