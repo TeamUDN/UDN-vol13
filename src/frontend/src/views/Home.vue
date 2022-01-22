@@ -87,8 +87,8 @@ export default {
   data () {
     return {
       isActive: '1',
-      userID: '0000',
-      userName: 'うどん',
+      userID: '',
+      userName: '',
       getProgressDataArr: [],
       chartShow: false,
       searchDateArr: []
@@ -106,11 +106,33 @@ export default {
         console.log('2回目以降のアクセスです')
         var userID = localStorage.getItem('userID')
         console.log(userID)
+        this.userID = userID
+        db.collection('user').where('userID', '==', this.userID)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              console.log(doc.data().userName)
+              // this.data.push(doc.data().name)
+              this.userName = doc.data().name
+            })
+          })
       } else {
         console.log('初回アクセスです')
         var createUserID = this.createID(15)
         console.log(createUserID)
         localStorage.setItem('userID', createUserID)
+        this.userID = createUserID
+        db.collection('user').add({
+          userID: this.userID,
+          userName: 'そば',
+          icon: 1
+        })
+          .then(function () {
+            console.log('Document successfully written!')
+          })
+          .catch(function (error) {
+            console.error('Error writing document: ', error)
+          })
       }
     },
     localStorageRemove () {
