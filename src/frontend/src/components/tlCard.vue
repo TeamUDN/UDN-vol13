@@ -4,7 +4,7 @@
       <div class="circle"></div>
       <div class="mainText">
         <p class="userName">{{ userId }}</p>
-        <p class="message">{{ btnType }}</p>
+        <p class="message" v-html="message"></p>
       </div>
     </div>
   <div class="dateArea">
@@ -45,6 +45,35 @@ export default {
       type: Number,
       required: true
     }
+  },
+  data () {
+    return {
+      message: ''
+    }
+  },
+  mounted: function () {
+    this.btnTypeCheck(this.btnType)
+  },
+  methods: {
+    btnTypeCheck (num) {
+      switch (num) {
+        case 1:
+          this.message = '&#x1f60e; いい感じ'
+          break
+        case 2:
+          this.message = '&#x1f607; なにもわからん'
+          break
+        case 3:
+          this.message = '&#x1f44d; できた！！'
+          break
+        case 4:
+          this.message = '&#x1f97a; ぴえん'
+          break
+        case 5:
+          this.message = '&#x1f393; 天才かも…！？'
+          break
+      }
+    }
   }
 }
 </script>
@@ -55,7 +84,7 @@ export default {
   height: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.7rem;
   margin: 1rem auto;
   padding: 1rem 1.5rem;
   border-radius: 5px;
@@ -78,8 +107,9 @@ export default {
   width: fit-content;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.3rem;
   p {
+    width: fit-content;
     margin: 0;
   }
 }
