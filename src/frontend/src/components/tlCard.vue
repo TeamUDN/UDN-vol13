@@ -95,7 +95,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
   padding: 1rem 1.5rem;
   border-radius: 5px;
   border: 1px solid #e9e9e9;
