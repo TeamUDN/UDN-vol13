@@ -38,11 +38,14 @@
           <button @click="pushTest">pushTest</button>
           <button @click="whereTest">whereTest</button>
           <div v-for="data in getProgressDataArr" :key="data.minute">
+            <Card :user-id="data.userID" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
+          </div>
+          <!--<div v-for="data in getProgressDataArr" :key="data.minute">
             <p>userID: {{ data.userID }}</p>
             <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
             <p>btnType: {{ data.btnType }}</p>
             <hr>
-          </div>
+          </div>-->
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <button @click="postProgress(1)">
@@ -70,12 +73,14 @@
 import db from '../components/firebase.js'
 import Chart from '../components/Chart'
 import Btn from '../components/btn_design.vue'
+import Card from '../components/tlCard.vue'
 
 export default {
   name: 'home',
   components: {
     Chart,
-    Btn
+    Btn,
+    Card
   },
   data () {
     return {
