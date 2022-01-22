@@ -4,19 +4,19 @@
       <div class="chartArea">
         <p>全体</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>チーム</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>個人</p>
         <div>
-          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
     </div>
@@ -88,16 +88,16 @@ export default {
       userID: '0000',
       userName: 'うどん',
       getProgressDataArr: [],
-      endNum: 0,
-      chartShow: false
+      chartShow: false,
+      searchDateArr: []
     }
   },
   mounted: function () {
-    var date = new Date()
-    var hour = date.getHours()
-    this.endNum = hour
+    this.searchDateArr = this.getNowDate()
+    this.endNum = this.searchDateArr[3]
     this.chartShow = true
     this.getProgress()
+    console.log(this.searchDateArr)
   },
   methods: {
     getTest () {
