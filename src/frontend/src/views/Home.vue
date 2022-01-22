@@ -37,6 +37,12 @@
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
           <button @click="whereTest">whereTest</button>
+          <div v-for="data in getProgressDataArr" :key="data.minute">
+            <p>userID: {{ data.userID }}</p>
+            <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
+            <p>btnType: {{ data.btnType }}</p>
+            <hr>
+          </div>
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <button @click="postProgress(1)">
@@ -74,8 +80,12 @@ export default {
   data () {
     return {
       isActive: '1',
-      userID: '0000'
+      userID: '0000',
+      getProgressDataArr: []
     }
+  },
+  mounted: function () {
+    this.getProgress()
   },
   methods: {
     getTest () {
@@ -117,9 +127,10 @@ export default {
       return dateArr
     },
     postProgress (type) {
-      var getNowDate = this.getNowDate()
+      var self = this
+      var getNowDate = self.getNowDate()
       db.collection('logs').add({
-        userID: this.userID,
+        userID: self.userID,
         btnType: type,
         date: {
           year: getNowDate[0],
@@ -131,9 +142,19 @@ export default {
       })
         .then(function () {
           console.log('Document successfully written!')
+          self.getProgress()
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
+        })
+    },
+    getProgress () {
+      db.collection('logs')
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.getProgressDataArr.push(doc.data())
+          })
         })
     }
   }
@@ -209,6 +230,13 @@ button{
 .contents {
   width: 100%;
   height: 92%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 }
 input[type=radio] {
   display: none;
