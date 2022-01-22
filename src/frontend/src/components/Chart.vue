@@ -32,10 +32,13 @@ export default {
           break
         case 'time':
           this.canvasLabel = '時'
-          var endNumTime = parseInt(this.labelEndNum, 10)
+          var timeCalcNum = this.labelEndNum
           for (let i = 0; i < 7; i++) {
-            this.labelArr.push(endNumTime)
-            endNumTime -= 1
+            this.labelArr.push(timeCalcNum)
+            timeCalcNum -= 1
+            if (timeCalcNum === -1) {
+              timeCalcNum = 23
+            }
           }
           this.labelArr = this.labelArr.reverse()
           break

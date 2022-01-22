@@ -4,19 +4,19 @@
       <div class="chartArea">
         <p>全体</p>
         <div>
-          <Chart canvas-label-type="date" label-end-num="9"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>チーム</p>
         <div>
-          <Chart canvas-label-type="time" label-end-num="15"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
       <div class="chartArea">
         <p>個人</p>
         <div>
-          <Chart canvas-label-type="time" label-end-num="30"></Chart>
+          <Chart v-if="chartShow" canvas-label-type="time" :label-end-num="endNum"></Chart>
         </div>
       </div>
     </div>
@@ -86,10 +86,16 @@ export default {
     return {
       isActive: '1',
       userID: '0000',
-      getProgressDataArr: []
+      getProgressDataArr: [],
+      endNum: 0,
+      chartShow: false
     }
   },
   mounted: function () {
+    var date = new Date()
+    var hour = date.getHours()
+    this.endNum = hour
+    this.chartShow = true
     this.getProgress()
   },
   methods: {
