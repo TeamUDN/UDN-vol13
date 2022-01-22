@@ -17,11 +17,13 @@ export default {
     return {
       labelArr: [],
       dataArr: [],
-      startNum: 0
+      startNum: 0,
+      chart: null
     }
   },
   methods: {
     labelCheck () {
+      this.labelArr = []
       switch (this.canvasLabelType) {
         case 'date':
           var endNumDate = this.searchDateArr[2]
@@ -46,7 +48,6 @@ export default {
       }
     },
     async dataCount () {
-      console.log(this.startNum + '〜' + this.searchDateArr[3])
       var dataArr0 = []
       var dataArr1 = []
       var dataArr2 = []
@@ -119,7 +120,6 @@ export default {
                       }
                       break
                     case this.labelArr[1]:
-                      console.log(this.labelArr[1])
                       switch (doc.data().btnType) {
                         case 1:
                           pink1++
@@ -266,10 +266,13 @@ export default {
     async renderChart () {
       this.labelCheck()
       await this.dataCount()
-      console.log(this.dataArr)
+      // console.log(this.dataArr)
       // const ctx = document.getElementById('canvas')
       const ctx = this.$el
-      new Chart(ctx, {
+      if (this.chart) {
+        this.chart.destroy()
+      }
+      this.chart = new Chart(ctx, {
         type: 'line',
         data: {
           // labels: ['赤', '青', '黄色', '緑', '紫', '橙'],
