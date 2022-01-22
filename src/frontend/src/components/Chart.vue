@@ -94,11 +94,14 @@ export default {
         case 'date':
           break
         case 'time':
-          await db.collection('logs').where('date.year', '==', this.searchDateArr[0]).where('date.month', '==', this.searchDateArr[1]).where('date.day', '==', this.searchDateArr[2])
+          var today = this.searchDateArr[2]
+          var yesterday = today - 1
+          await db.collection('logs').where('date.year', '==', this.searchDateArr[0]).where('date.month', '==', this.searchDateArr[1]).where('date.day', 'in', [today, yesterday])
             .get()
             .then((querySnapshot) => {
               querySnapshot.forEach((doc) => {
-                if ((this.startNum <= doc.data().date.hour) && (doc.data().date.hour <= this.searchDateArr[3])) {
+                var test = '(this.startNum <= doc.data().date.hour) && (doc.data().date.hour <= this.searchDateArr[3])'
+                if (test) {
                   switch (doc.data().date.hour) {
                     case this.labelArr[0]:
                       switch (doc.data().btnType) {
