@@ -12,12 +12,17 @@
       <div class="header">
         <div class="userNameArea">
           <span class="material-icons">account_circle</span>
-          <div class="showUserName">
+          <div class="showUserName" v-if="!showInput">
             <p class="userName">{{ userName }}</p>
             <p>さん</p>
           </div>
+          <div class="showUserName" v-if="showInput">
+            <input type="text" ref="userNameInput" placeholder="名無しさん">
+            <p>さん</p>
+          </div>
         </div>
-        <button @click="loginFunc"><span class="material-icons">login</span></button>
+        <button @click="showForm" v-if="!showInput"><span class="material-icons">login</span></button>
+        <button @click="loginFunc" v-if="showInput"><span class="material-icons">edit</span></button>
         <!--<button @click="localStorageRemove">localStorageRemove</button>-->
       </div>
       <img class="logoImg" src="/static/img/logo.png">
@@ -111,7 +116,8 @@ export default {
       userName: '',
       getProgressDataArr: [],
       chartShow: false,
-      searchDateArr: []
+      searchDateArr: [],
+      showInput: false
       // firstVisit: false
     }
   },
@@ -120,7 +126,7 @@ export default {
     this.searchDateArr = this.getNowDate()
     this.endNum = this.searchDateArr[3]
     this.chartShow = true
-    // this.getProgress()
+    this.getProgress()
   },
   methods: {
     localStorage () {
@@ -128,8 +134,8 @@ export default {
         console.log('2回目以降のアクセスです')
         var userID = localStorage.getItem('userID')
         var userName = localStorage.getItem('userName')
-        console.log(userID)
-        console.log(userName)
+        // console.log(userID)
+        // console.log(userName)
         this.userID = userID
         this.userName = userName
         /*
@@ -155,6 +161,9 @@ export default {
         // this.firstVisit = true
       }
     },
+    showForm () {
+      this.showInput = true
+    },
     loginFunc () {
       // this.firstVisit = false
       this.userName = this.$refs.userNameInput.value
@@ -162,6 +171,7 @@ export default {
         this.userName = '名無し'
       }
       localStorage.setItem('userName', this.userName)
+      this.showInput = false
       /*
       db.collection('user').add({
         userID: this.userID,
