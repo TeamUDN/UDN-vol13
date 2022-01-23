@@ -1,29 +1,22 @@
-# Vue-Flask-practice
+# 進捗Dou？ &#x270f;
+<image src='./src/frontend/public/static/img/OGP.png'>
 
-Vue CLI + Flask の練習
+## &#x2728; 作品URL
+https://udn-vol13-b8181.web.app/<br>
+  
+## &#x1f4c4; 発表資料URL
+https://docs.google.com/presentation/d/1tbgNwS1jloXkIDSwMe-WnZ2-AvfPiN77BcMsVkpk2wU/edit?usp=sharing<br>
 
-## Vue CLI の build
-```
-$ cd src/frontend
-$ npm run build
-```
+## &#x1f973; 使い方
+- 
 
-## フロントエンド単体での開発用サーバ起動
-```
-$ cd src/frontend
-$ npm run serve
-```
+## &#x1f44d; 実装機能
+- 
 
-## FlaskのWebサーバ起動
-```
-$ cd src
-$ pipenv run start
-```
+## &#x1f4af; こだわった点
+- 
 
-## Docker起動
-```
-$ docker compose up
-```
-
-## 参考記事
-- [FlaskとVue.jsでSPA Webアプリ開発](https://qiita.com/y-tsutsu/items/67f71fc8430a199a3efd)
+## &#x1f4bb; 使用技術
+- Vue CLI
+- Firestore
+- Firebase
