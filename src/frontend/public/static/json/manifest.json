@@ -1,0 +1,20 @@
+{
+    "name": "進捗Dou？",
+    "short_name": "進捗Dou？",
+    "icons": [
+        {
+            "src": "../img/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "../img/icon192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFB7C8"
+}
