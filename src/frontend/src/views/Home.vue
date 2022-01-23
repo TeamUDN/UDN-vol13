@@ -295,6 +295,7 @@ button{
 
 .home {
   display: flex;
+  flex-direction: row;
 }
 .allChartArea {
   width: 75%;
@@ -358,5 +359,34 @@ input[type=radio] {
   gap: 4rem;
   align-items: center;
   justify-content: center;
+  margin: 0;
+}
+
+/* mobileここから */
+@media screen and (max-width: 950px) {
+  .home {
+    flex-direction: column;
+  }
+  .logoImg {
+    width: 16rem;
+    margin: 1rem auto;
+  }
+  .chartArea{
+    padding: 0 0 2rem;
+    div {
+      width: 21rem;
+    }
+  }
+  .allChartArea {
+    width: 100vw;
+    height: fit-content;
+  }
+  .tabArea {
+    width: 100vw;
+    height: fit-content;
+  }
+  .btnArea {
+    margin: 3rem 0;
+  }
 }
 </style>
