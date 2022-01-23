@@ -1,14 +1,6 @@
 <template>
   <div class="home">
     <div class="allChartArea">
-    <!--<div class="modalArea"  v-if="firstVisit">
-        <div class="modal">
-        <button @click="localStorage">localStorageTest</button>
-        <input type="text" ref="userNameInput" placeholder="名無しさん">
-        <button class="loginBtn" @click="loginFunc">はじめる</button>
-        </div>
-      </div>
-      <button @click="localStorageRemove">localStorageRemove</button>-->
       <div class="header">
         <div class="userNameArea">
           <span class="material-icons">account_circle</span>
@@ -27,23 +19,10 @@
       </div>
       <img class="logoImg" src="/static/img/logo.png">
       <div class="chartArea">
-        <!--<p>全体</p>-->
         <div>
           <Chart ref="chart1" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
-      <!--<div class="chartArea">
-        <p>チーム</p>
-        <div>
-          <Chart ref="chart2" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
-        </div>
-      </div>-->
-      <!--<div class="chartArea">
-        <p>個人</p>
-        <div>
-          <Chart ref="chart3" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
-        </div>
-      </div>-->
     </div>
     <div class="tabArea">
       <div class="tabs">
@@ -67,12 +46,6 @@
           <div v-for="data in getProgressDataArr" :key="data.minute">
             <Card :user-name="data.userName" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
           </div>
-          <!--<div v-for="data in getProgressDataArr" :key="data.minute">
-            <p>userID: {{ data.userID }}</p>
-            <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
-            <p>btnType: {{ data.btnType }}</p>
-            <hr>
-          </div>-->
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <button @click="postProgress(1)">
@@ -118,7 +91,6 @@ export default {
       chartShow: false,
       searchDateArr: [],
       showInput: false
-      // firstVisit: false
     }
   },
   mounted: function () {
@@ -134,8 +106,6 @@ export default {
         console.log('2回目以降のアクセスです')
         var userID = localStorage.getItem('userID')
         var userName = localStorage.getItem('userName')
-        // console.log(userID)
-        // console.log(userName)
         this.userID = userID
         this.userName = userName
         /*
@@ -148,7 +118,6 @@ export default {
               this.userName = doc.data().name
             })
           })
-        this.firstVisit = false
         */
       } else {
         console.log('初回アクセスです')
@@ -158,14 +127,12 @@ export default {
         localStorage.setItem('userName', '名無し')
         this.userID = createUserID
         this.userName = '名無し'
-        // this.firstVisit = true
       }
     },
     showForm () {
       this.showInput = true
     },
     loginFunc () {
-      // this.firstVisit = false
       this.userName = this.$refs.userNameInput.value
       if (this.userName === '') {
         this.userName = '名無し'
@@ -238,8 +205,6 @@ export default {
       return dateArr
     },
     postProgress (type) {
-      // console.log('test')
-      // console.log(this.userName)
       var self = this
       var getNowDate = self.getNowDate()
       db.collection('logs').add({
@@ -259,8 +224,6 @@ export default {
           self.getProgress()
           self.isActive = '1'
           self.$refs.chart1.renderChart()
-          // self.$refs.chart2.renderChart()
-          // self.$refs.chart3.renderChart()
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
@@ -291,25 +254,6 @@ button{
   padding: 0;
   appearance: none;
 }
-
-/*
-.modalArea {
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.modal {
-  width: 60%;
-  height:55%;
-  background-color: #ffffff;
-  border-radius: 10px;
-}
-*/
 
 .material-icons {
   color: #464646;
@@ -355,35 +299,16 @@ button{
 .allChartArea {
   width: 75%;
   height: 100vh;
-  // overflow-x: hidden;
-  // overflow-y: scroll;
-  // -ms-overflow-style: none;
-  // scrollbar-width: none;
   display: flex;
   flex-direction: column;
   background-color: #FFEAEF;
-  /*
-  &::-webkit-scrollbar{
-    display: none;
-  }
-  */
 }
 .chartArea{
-  /*
-  &:nth-child(even){
-    background-color: #FFEAEF;
-  }
-  */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4rem 0;
-  /*
-  p{
-    font-size: 1.7rem;
-  }
-  */
   div {
     width: 60rem;
   }
