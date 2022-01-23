@@ -9,6 +9,9 @@
         </div>
       </div>
       <button @click="localStorageRemove">localStorageRemove</button>-->
+      <div class="header">
+        <img class="logoImg" src="/static/img/logo.png">
+      </div>
       <button @click="localStorageRemove">localStorageRemove</button>
       <div class="chartArea">
         <!--<p>全体</p>-->
@@ -109,7 +112,7 @@ export default {
     this.searchDateArr = this.getNowDate()
     this.endNum = this.searchDateArr[3]
     this.chartShow = true
-    this.getProgress()
+    // this.getProgress()
   },
   methods: {
     localStorage () {
@@ -290,36 +293,47 @@ button{
 }
 */
 
+.logoImg {
+  width: 23rem;
+}
+
 .home {
   display: flex;
 }
 .allChartArea {
   width: 75%;
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  // overflow-x: hidden;
+  // overflow-y: scroll;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
   display: flex;
   flex-direction: column;
+  background-color: #FFEAEF;
+  /*
   &::-webkit-scrollbar{
     display: none;
   }
+  */
 }
 .chartArea{
+  /*
   &:nth-child(even){
     background-color: #FFEAEF;
   }
+  */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0 4rem 0;
+  padding: 4rem 0;
+  /*
   p{
     font-size: 1.7rem;
   }
+  */
   div {
-    width: 50rem;
+    width: 60rem;
   }
 }
 .tabArea {
