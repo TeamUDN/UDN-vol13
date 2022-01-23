@@ -9,6 +9,7 @@
         </div>
       </div>
       <button @click="localStorageRemove">localStorageRemove</button>-->
+      <button @click="localStorageRemove">localStorageRemove</button>
       <div class="chartArea">
         <!--<p>全体</p>-->
         <div>
@@ -104,19 +105,22 @@ export default {
     }
   },
   mounted: function () {
+    this.localStorage()
     this.searchDateArr = this.getNowDate()
     this.endNum = this.searchDateArr[3]
     this.chartShow = true
     this.getProgress()
-    // this.localStorage()
   },
   methods: {
     localStorage () {
       if (localStorage.getItem('userID')) {
         console.log('2回目以降のアクセスです')
         var userID = localStorage.getItem('userID')
+        var userName = localStorage.getItem('userName')
         console.log(userID)
+        console.log(userName)
         this.userID = userID
+        this.userName = userName
         /*
         db.collection('user').where('userID', '==', this.userID)
           .get()
@@ -134,8 +138,10 @@ export default {
         var createUserID = this.createID(15)
         console.log(createUserID)
         localStorage.setItem('userID', createUserID)
+        localStorage.setItem('userName', '名無しさん')
         this.userID = createUserID
-        this.firstVisit = true
+        this.userName = '名無しさん'
+        // this.firstVisit = true
       }
     },
     loginFunc () {
@@ -144,6 +150,7 @@ export default {
       if (this.userName === '') {
         this.userName = '名無しさん'
       }
+      localStorage.setItem('userName', this.userName)
       /*
       db.collection('user').add({
         userID: this.userID,
@@ -215,8 +222,8 @@ export default {
       var self = this
       var getNowDate = self.getNowDate()
       db.collection('logs').add({
-        userID: '0000',
-        userName: 'うどん',
+        userID: self.userID,
+        userName: self.userName,
         btnType: type,
         date: {
           year: getNowDate[0],
