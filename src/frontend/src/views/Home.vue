@@ -1,22 +1,26 @@
 <template>
   <div class="home">
     <div class="allChartArea">
+      <div class="header">
+        <div class="userNameArea">
+          <span class="material-icons">account_circle</span>
+          <div class="showUserName" v-if="!showInput">
+            <p class="userName">{{ userName }}</p>
+            <p>さん</p>
+          </div>
+          <div class="showUserName" v-if="showInput">
+            <input type="text" ref="userNameInput" placeholder="名無しさん">
+            <p>さん</p>
+          </div>
+        </div>
+        <button @click="showForm" v-if="!showInput"><span class="material-icons">login</span></button>
+        <button @click="loginFunc" v-if="showInput"><span class="material-icons">edit</span></button>
+        <!--<button @click="localStorageRemove">localStorageRemove</button>-->
+      </div>
+      <img class="logoImg" src="/static/img/logo.png">
       <div class="chartArea">
-        <p>全体</p>
         <div>
           <Chart ref="chart1" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
-        </div>
-      </div>
-      <div class="chartArea">
-        <p>チーム</p>
-        <div>
-          <Chart ref="chart2" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
-        </div>
-      </div>
-      <div class="chartArea">
-        <p>個人</p>
-        <div>
-          <Chart ref="chart3" v-if="chartShow" canvas-label-type="time" :search-date-arr="searchDateArr"></Chart>
         </div>
       </div>
     </div>
@@ -33,6 +37,8 @@
       </div>
       <div class="contents">
         <div v-if="isActive === '1'">
+          <!--<button @click="localStorageTest">localStorageTest</button>
+          <button @click="localStorageRemove">localStorageRemove</button>-->
           <!--タイムライン
           <button @click="getTest">getTest</button>
           <button @click="pushTest">pushTest</button>
@@ -40,12 +46,6 @@
           <div v-for="data in getProgressDataArr" :key="data.minute">
             <Card :user-name="data.userName" :btn-type="data.btnType" :year="data.date.year" :month="data.date.month" :day="data.date.day" :hour="data.date.hour" :minute="data.date.minute"></Card>
           </div>
-          <!--<div v-for="data in getProgressDataArr" :key="data.minute">
-            <p>userID: {{ data.userID }}</p>
-            <p>date: {{ data.date.year }}/{{ data.date.month }}/{{ data.date.day }}: {{ data.date.hour }}:{{ data.date.minute }}</p>
-            <p>btnType: {{ data.btnType }}</p>
-            <hr>
-          </div>-->
         </div>
         <div class="btnArea" v-else-if="isActive === '2'">
           <button @click="postProgress(1)">
@@ -85,20 +85,87 @@ export default {
   data () {
     return {
       isActive: '1',
-      userID: '0000',
-      userName: 'うどん',
+      userID: '',
+      userName: '',
       getProgressDataArr: [],
       chartShow: false,
-      searchDateArr: []
+      searchDateArr: [],
+      showInput: false
     }
   },
   mounted: function () {
+    this.localStorage()
     this.searchDateArr = this.getNowDate()
     this.endNum = this.searchDateArr[3]
     this.chartShow = true
     this.getProgress()
   },
   methods: {
+    localStorage () {
+      if (localStorage.getItem('userID')) {
+        console.log('2回目以降のアクセスです')
+        var userID = localStorage.getItem('userID')
+        var userName = localStorage.getItem('userName')
+        this.userID = userID
+        this.userName = userName
+        /*
+        db.collection('user').where('userID', '==', this.userID)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              console.log(doc.data().userName)
+              // this.data.push(doc.data().name)
+              this.userName = doc.data().name
+            })
+          })
+        */
+      } else {
+        console.log('初回アクセスです')
+        var createUserID = this.createID(15)
+        console.log(createUserID)
+        localStorage.setItem('userID', createUserID)
+        localStorage.setItem('userName', '名無し')
+        this.userID = createUserID
+        this.userName = '名無し'
+      }
+    },
+    showForm () {
+      this.showInput = true
+    },
+    loginFunc () {
+      this.userName = this.$refs.userNameInput.value
+      if (this.userName === '') {
+        this.userName = '名無し'
+      }
+      localStorage.setItem('userName', this.userName)
+      this.showInput = false
+      /*
+      db.collection('user').add({
+        userID: this.userID,
+        userName: this.userName,
+        icon: 1
+      })
+        .then(function () {
+          console.log('Document successfully written!')
+        })
+        .catch(function (error) {
+          console.error('Error writing document: ', error)
+        })
+      */
+    },
+    localStorageRemove () {
+      localStorage.clear()
+    },
+    createID (n) {
+      var CODE_TABLE = '0123456789' +
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ' +
+        'abcdefghijklmnopqrstuvwxyz'
+      var r = ''
+      for (var i = 0, k = CODE_TABLE.length; i < n; i++) {
+        r += CODE_TABLE.charAt(Math.floor(k * Math.random()))
+      }
+      return r
+    },
     getTest () {
       db.collection('test')
         .get()
@@ -157,8 +224,6 @@ export default {
           self.getProgress()
           self.isActive = '1'
           self.$refs.chart1.renderChart()
-          self.$refs.chart2.renderChart()
-          self.$refs.chart3.renderChart()
         })
         .catch(function (error) {
           console.error('Error writing document: ', error)
@@ -166,7 +231,7 @@ export default {
     },
     getProgress () {
       this.getProgressDataArr = []
-      db.collection('logs')
+      db.collection('logs').limit(20)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -190,36 +255,62 @@ button{
   appearance: none;
 }
 
+.material-icons {
+  color: #464646;
+  font-size: 2rem;
+}
+
+.header {
+  width: fit-content;
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 2rem 0 auto;
+}
+
+.userNameArea {
+  width: fit-content;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.showUserName {
+  width: fit-content;
+  display: flex;
+  font-size: 1.1rem;
+  align-items: center;
+  gap: 0.3rem;
+  p {
+    margin: 0;
+  }
+}
+.userName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.logoImg {
+  width: 23rem;
+  margin: 0 auto;
+}
+
 .home {
   display: flex;
 }
 .allChartArea {
   width: 75%;
   height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
   display: flex;
   flex-direction: column;
-  &::-webkit-scrollbar{
-    display: none;
-  }
+  background-color: #FFEAEF;
 }
 .chartArea{
-  &:nth-child(even){
-    background-color: #FFEAEF;
-  }
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0 4rem 0;
-  p{
-    font-size: 1.7rem;
-  }
+  padding: 4rem 0;
   div {
-    width: 50rem;
+    width: 60rem;
   }
 }
 .tabArea {
