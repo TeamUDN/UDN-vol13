@@ -10,9 +10,17 @@
       </div>
       <button @click="localStorageRemove">localStorageRemove</button>-->
       <div class="header">
-        <img class="logoImg" src="/static/img/logo.png">
+        <div class="userNameArea">
+          <span class="material-icons">account_circle</span>
+          <div class="showUserName">
+            <p class="userName">{{ userName }}</p>
+            <p>さん</p>
+          </div>
+        </div>
+        <button @click="loginFunc"><span class="material-icons">login</span></button>
+        <!--<button @click="localStorageRemove">localStorageRemove</button>-->
       </div>
-      <button @click="localStorageRemove">localStorageRemove</button>
+      <img class="logoImg" src="/static/img/logo.png">
       <div class="chartArea">
         <!--<p>全体</p>-->
         <div>
@@ -141,9 +149,9 @@ export default {
         var createUserID = this.createID(15)
         console.log(createUserID)
         localStorage.setItem('userID', createUserID)
-        localStorage.setItem('userName', '名無しさん')
+        localStorage.setItem('userName', '名無し')
         this.userID = createUserID
-        this.userName = '名無しさん'
+        this.userName = '名無し'
         // this.firstVisit = true
       }
     },
@@ -151,7 +159,7 @@ export default {
       // this.firstVisit = false
       this.userName = this.$refs.userNameInput.value
       if (this.userName === '') {
-        this.userName = '名無しさん'
+        this.userName = '名無し'
       }
       localStorage.setItem('userName', this.userName)
       /*
@@ -293,8 +301,42 @@ button{
 }
 */
 
+.material-icons {
+  color: #464646;
+  font-size: 2rem;
+}
+
+.header {
+  width: fit-content;
+  display: flex;
+  gap: 2rem;
+  margin: 1.5rem 2rem 0 auto;
+}
+
+.userNameArea {
+  width: fit-content;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.showUserName {
+  width: fit-content;
+  display: flex;
+  font-size: 1.1rem;
+  align-items: center;
+  gap: 0.3rem;
+  p {
+    margin: 0;
+  }
+}
+.userName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .logoImg {
   width: 23rem;
+  margin: 0 auto;
 }
 
 .home {
