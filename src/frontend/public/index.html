@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+  <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
+    <meta name="theme-color" content="#FFB7C8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta property="og:title" content="進捗Dou？">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://udn-vol13-b8181.web.app/">
+    <meta property="og:image" content="https://udn-vol13-b8181.web.app/static/img/OGP.png" />
+    <meta property="og:description" content="進捗どうですか？ボタンを押して、今の進捗をシェアしましょう！">
+    <meta property="og:site_name" content="進捗Dou？">
+    <meta name="twitter:card" content="summary_large_image">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" href="<%= BASE_URL %>static/img/favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!--<title><%= htmlWebpackPlugin.options.title %></title>-->
+    <title>進捗Dou？</title>
     <style>
       body {
         margin: 0;
@@ -17,10 +26,10 @@
     <!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- ホーム画面に表示されるアプリ名 -->
-    <meta name="apple-mobile-web-app-title" content="進捗DOU？">
+    <meta name="apple-mobile-web-app-title" content="進捗Dou？">
     <!-- ホーム画面に表示されるアプリアイコン -->
     <link rel="apple-touch-icon" href="./static/img/icon512.png">
-  
+
     <!--アンドロイド用のはず-->
     <link rel="manifest" href="./static/json/manifest.json">
     <!-- ServiceWorkerの登録 -->
@@ -32,7 +41,7 @@
         });
       }
   </script>
-      
+
   </head>
   <body>
     <noscript>
