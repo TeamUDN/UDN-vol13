@@ -23,3 +23,7 @@ https://docs.google.com/presentation/d/1tbgNwS1jloXkIDSwMe-WnZ2-AvfPiN77BcMsVkpk
 - Vue CLI
 - Firestore
 - Firebase
+## 制作メンバー
+- Yuuna Yanagida
+- Leon Kunishi
+- Ryunosuke Ikeda
